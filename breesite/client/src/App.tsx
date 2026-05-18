@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Github, Linkedin, Mail, Folder, ArrowBigLeft } from 'lucide-react'
+import { Github, Linkedin, Mail, FileDown, GraduationCap, Briefcase, BadgeCheck, Microscope } from 'lucide-react'
+// import { Folder } from 'lucide-react' // re-enable with projects section
 import './App.css'
 
+/* projects data — re-enable with projects section
 const projects: {
   id: string
   label: string
@@ -40,19 +42,50 @@ const projects: {
     ],
   },
 ]
+*/
 
 const timelineData = [
-  { title: 'Full Stack Developer', company: 'Aderas', date: '2024 - Present', description: 'Building full-stack web applications. Emergency reporting system built with AWS Lambda, API Gateway, and S3. Proprietary AI tool for the Department of Finance Development on Azure webapp, integrated with Sharepoint and Salesforce.' },
-  { title: 'Software Developer Intern', company: 'VAE Inc.', date: 'June 2024 - May 2025', description: '- Contributed to the Agile software development process on a full-stack development team to develop a network device discovery and reporting tool submitted for DISA APL testing and deployed at several sites in the Department of Defense\n- Enforced C#/.NET code analyzers by fixing violations in existing code base to ensure compliance to cybersecurity and regulatory rules\n- Mapped enforced Microsoft Code Analysis security rules to GitLab SAST rules and the OWASP Top 10 Web Application Security Risks' },
-  { title: 'Researcher', company: 'University of Virginia', date: 'January 2025 - Present', description: '- Researching at the UVA Collaborative Robotics Lab to help publish first-author paper at the HRI conference (Multi-Agentic Systems in HRI workshop)\n- Presented to a group of researchers on mitigating labor-intensive reinforcement learning in robotics with the PREDILECT framework, combining state-action pairs with human preferences'},
-  { title: 'Instructor', company: 'University of Virginia', date: 'Auguest 2024 - December 2024', description: '- Led a student instructor class CS 1501: Hacktivism through lectures, coding labs and office hours on social and technical analysis of hacking events related to activism. Held additional review sessions on networking basics including subnetting, special IP address usage, nmap commands\n- Exercised ethical hacking basics: port scanning, SQL Injection, bash scripting, packet sniffing with Wireshark, Metasploit attacks on Virginia Cyber Range Kali Linux (Cyber Basics and Metasploitable 3)' },
-  
+  {
+    title: 'Software Engineer',
+    company: 'Aderas',
+    date: 'June 2025 – Present',
+    description: 'Developing AI-powered data analysis platforms on AWS and Azure for government clients, integrating Salesforce and SharePoint pipelines to improve data interoperability. Containerized Azure Functions using Docker and applied DevSecOps scanning practices to harden images; implemented real-time streaming within AI workflows to reduce latency.',
+  },
+  {
+    title: 'Part-time Associate Software Engineer',
+    company: 'VAE, Inc.',
+    date: 'June 2024 – May 2025',
+    description: 'Built a full-stack network device discovery and reporting tool for DoD deployment using Angular/TypeScript and C#/.NET; integrated REST APIs and containerized services with Docker; enforced DISA APL compliance via .NET code analyzers. Mapped Microsoft Code Analysis rules to GitLab SAST and OWASP Top 10; supported CI/CD regression testing with Cypress and simulated networks of 400+ devices in PostgreSQL for multi-cycle vulnerability analysis.',
+  },
+]
+
+const navItems = [
+  { id: 'about',      label: 'about' },
+  { id: 'education',  label: 'education' },
+  { id: 'experience', label: 'experience' },
+  { id: 'skills',     label: 'skills' },
+  { id: 'research',   label: 'research' },
 ]
 
 function App() {
-  const [activeProject, setActiveProject] = useState<string | null>(null)
-  const activeProj = projects.find((p) => p.id === activeProject)
+  const [activeSection, setActiveSection] = useState('about')
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { threshold: 0.35 }
+    )
+    navItems.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     canvasRef.current!.width = window.innerWidth
@@ -149,7 +182,35 @@ function App() {
 
   return (
     <div className="page">
-      <div className="sidebar"></div>
+      <div className="sidebar">
+        <nav className="sidebar-nav" aria-label="Page sections">
+          <span className="sidebar-name">bl</span>
+          {navItems.map(({ id, label }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={`sidebar-link${activeSection === id ? ' active' : ''}`}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+        <div className="sidebar-connect">
+          <span className="sidebar-connect-title">connect</span>
+          <a href="https://github.com/breenice" target="_blank" rel="noopener noreferrer" className="sidebar-connect-link">
+            <Github size={16} /><span>Github</span>
+          </a>
+          <a href="https://www.linkedin.com/in/breenice-lee-838664261/" target="_blank" rel="noopener noreferrer" className="sidebar-connect-link">
+            <Linkedin size={16} /><span>LinkedIn</span>
+          </a>
+          <a href="mailto:breenicelee@gmail.com" className="sidebar-connect-link">
+            <Mail size={16} /><span>Email</span>
+          </a>
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download className="sidebar-connect-link">
+            <FileDown size={16} /><span>Resume</span>
+          </a>
+        </div>
+      </div>
       <div className="main-layout">
       <div className="right-content">
         <div className="title-row">
@@ -158,7 +219,7 @@ function App() {
         </div>
         <div className="grid-layout">
         {/* Row 1: Banner | Currently */}
-        <div className="cell banner">
+        <div id="about" className="cell banner">
           <p className="banner-text">
             an engineer who loves to build and found passion in coding in the process.
             into: gamification, security, and robotics.<br />
@@ -168,12 +229,28 @@ function App() {
         </div>
         <div className="cell currently">
           <h2 className="cell-title"><span className="blink-dot"></span>currently...</h2>
-          <div className="currently-inner">Full Stack Developer at Aderas</div>
+          <div className="currently-inner">Software Engineer at Aderas</div>
+        </div>
+
+        {/* Education — full width */}
+        <div id="education" className="cell education">
+          <h2 className="cell-title"><GraduationCap size={18} className="cell-title-icon" />education</h2>
+          <div className="edu-row">
+            <span className="edu-school">University of Virginia</span>
+            <span className="edu-degree">B.S. Computer Science — May 2025</span>
+            <span className="edu-gpa">In-major GPA: 3.94</span>
+            <span className="edu-courses">Relevant coursework: autonomous vehicles, machine learning, software development, cybersecurity, computer systems, networking, data structures &amp; algorithms</span>
+          </div>
+          <div className="edu-teaching">
+            <h3 className="extras-heading">teaching</h3>
+            <p className="extras-sub"><strong>Instructor — CS 1501: Intro to Hacktivism</strong> &nbsp;·&nbsp; Fall 2024</p>
+            <p className="extras-sub">Delivered lectures, labs, and office hours on hacking ethics and networking fundamentals (subnetting, nmap, SQL injection, Wireshark, Metasploit on Virginia Cyber Range).</p>
+          </div>
         </div>
 
         {/* Row 2: Experience | Skills */}
-        <div className="cell experience">
-          <h2 className="cell-title">experience</h2>
+        <div id="experience" className="cell experience">
+          <h2 className="cell-title"><Briefcase size={18} className="cell-title-icon" />experience</h2>
           <div className="timeline">
             {timelineData.map((entry, i) => (
               <div key={i} className="timeline-entry">
@@ -184,13 +261,50 @@ function App() {
             ))}
           </div>
         </div>
-        <div className="cell skills">
-          <h2 className="cell-title">extras</h2>
-          <p> AWS Solutions Certified Solutions Architect (2025)</p>
+        <div id="skills" className="cell skills">
+          <h2 className="cell-title"><BadgeCheck size={18} className="cell-title-icon" />skills &amp; credentials</h2>
+          <div className="credentials-row">
+            <div className="extras-section">
+              <h3 className="extras-heading">certifications</h3>
+              <p className="extras-sub">AWS Certified Solutions Architect</p>
+              <p className="extras-sub">Azure Administrator Associate</p>
+            </div>
+            <div className="extras-section">
+              <h3 className="extras-heading">clearance</h3>
+              <p className="extras-sub">Interim Secret Clearance</p>
+            </div>
+          </div>
+          <div className="extras-section">
+            <h3 className="extras-heading">skills</h3>
+            <div className="skill-tags">
+              {['Python', 'JavaScript', 'TypeScript', 'C#', 'Java', 'C/C++', 'R', 'SQL', 'MATLAB', 'Assembly', 'React', 'Angular', 'Django', '.NET', 'ROS', 'PyTorch', 'TensorFlow', 'OpenCV', 'Docker', 'AWS', 'Azure', 'PostgreSQL', 'SLAM', 'HTML/CSS'].map((s) => (
+                <span key={s} className="skill-tag">{s}</span>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Row 3: Projects | Connect */}
-        <div className="cell projects">
+        {/* Research */}
+        <div id="research" className="cell research">
+          <h2 className="cell-title"><Microscope size={18} className="cell-title-icon" />research</h2>
+          <div className="extras-section">
+            <h3 className="extras-heading">UVA Collaborative Robotics Lab &nbsp;·&nbsp; Feburary 2025 - Present </h3>
+            <p className="extras-sub">Developed an object detection pipeline using Grounded-SAM for 3D point cloud segmentation on an Intel RealSense camera (OpenCV, NumPy, PyTorch) to improve task and motion planning for a Franka Panda manipulator simulated in PyBullet. Built a multi-modal HRI system for the NAO robot integrating real-time speech recognition (OpenAI Whisper API) and physical responses to visual/auditory cues for hospital applications.</p>
+          </div>
+          <div className="research-divider" />
+          <div className="extras-section">
+            <h3 className="extras-heading">publications</h3>
+            <p className="extras-sub">
+              <a href="https://arxiv.org/abs/2604.11975" target="_blank" rel="noopener noreferrer"><em>A Multimodal Framework for Human-Multi-Agent Interaction</em></a> — first author, ACM/IEEE HRI 2026 Workshop
+            </p>
+            <p className="extras-sub">
+              <a href="https://project-m2hri.github.io/" target="_blank" rel="noopener noreferrer"><em>M2HRI: An LLM-Driven Multimodal Multi-Agent Framework for Personalized HRI</em></a> — under review, IEEE RO-MAN 2026
+            </p>
+          </div>
+        </div>
+
+        {/* Projects — commented out for now
+        <div id="projects" className="cell projects">
           <h2 className="cell-title">projects</h2>
           {activeProj
             ? <div className="project-content">
@@ -226,23 +340,7 @@ function App() {
               </div>
           }
         </div>
-        <div className="cell connect">
-          <h2 className="cell-title">connect with me</h2>
-          <ul className="link-list">
-            <li className="link-item">
-              <Github className="link-icon" />
-              <a href="https://github.com/breenice" target="_blank" rel="noopener noreferrer">Github</a>
-            </li>
-            <li className="link-item">
-              <Linkedin className="link-icon" />
-              <a href="https://www.linkedin.com/in/breenice-lee-838664261/" target="_blank" rel="noopener noreferrer">Linkedin</a>
-            </li>
-            <li className="link-item">
-              <Mail className="link-icon" />
-              <a href="" target="_blank" rel="noopener noreferrer">breenicelee@gmail.com</a>
-            </li>
-          </ul>
-        </div>
+        */}
         </div>
       </div>
       </div>

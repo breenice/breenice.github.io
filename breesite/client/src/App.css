@@ -1,7 +1,7 @@
 :root {
   --color-bg: #242424;
   --color-title: #8c92f9;
-  --color-cell: rgba(255, 255, 255, 0.35);
+  --color-cell: rgba(255, 255, 255, 0.72);
   --color-border: #333;
   --container-radius: 12px;
   --gap: 1.5rem;
@@ -83,11 +83,94 @@ body::after {
   left: 0;
   width: 180px;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.3);
-  background-size: cover;
-  background-position: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
   z-index: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 2rem;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  gap: 0.25rem;
+}
+
+.sidebar-name {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-title);
+  margin-bottom: 1.75rem;
+  padding: 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-link {
+  font-size: 0.85rem;
+  color: inherit;
+  text-decoration: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-weight: 400;
+}
+
+.sidebar-link:hover {
+  background: rgba(140, 146, 249, 0.12);
+  color: var(--color-title);
+}
+
+.sidebar-link.active {
+  border-left-color: var(--color-title);
+  color: var(--color-title);
+  font-weight: 600;
+  background: rgba(140, 146, 249, 0.12);
+}
+
+.sidebar-connect {
+  margin-top: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar-connect-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.45;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-connect-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--color-title);
+  text-decoration: none;
+  padding: 0.3rem 0.25rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.sidebar-connect-link:hover {
+  color: var(--color-title);
+  background: rgba(140, 146, 249, 0.1);
 }
 
 .right-content {
@@ -117,6 +200,14 @@ body::after {
 .cell-title {
   margin: 0 0 0.75rem;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cell-title-icon {
+  color: var(--color-title);
+  flex-shrink: 0;
 }
 
 /* Banner cell */
@@ -175,19 +266,56 @@ body::after {
   box-sizing: border-box;
 }
 
-/* Experience cell - scrollable timeline */
+/* Education cell */
+.cell.education {
+  grid-column: 1 / -1;
+}
+
+.edu-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.25rem;
+}
+
+.edu-school {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.edu-degree {
+  font-size: 0.9rem;
+}
+
+.edu-gpa {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.edu-courses {
+  width: 100%;
+  font-size: 0.82rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+.edu-teaching {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Experience cell */
 .cell.experience {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
 }
 
 .timeline {
-  overflow-y: auto;
-  max-height: 300px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-right: 0.5rem;
 }
 
 .timeline-entry {
@@ -214,6 +342,76 @@ body::after {
 
 /* Skills cell */
 .cell.skills {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+}
+
+.credentials-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.credentials-row .extras-section {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.extras-section {
+  margin-bottom: 1rem;
+}
+
+.extras-section:last-child {
+  margin-bottom: 0;
+}
+
+.extras-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-title);
+  margin: 0 0 0.35rem;
+  opacity: 0.9;
+}
+
+.extras-main {
+  margin: 0 0 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.extras-sub {
+  margin: 0 0 0.15rem;
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.skill-tag {
+  background: rgba(140, 146, 249, 0.15);
+  border: 1px solid rgba(140, 146, 249, 0.4);
+  color: var(--color-title);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.research-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0.75rem 0;
+}
+
+/* Research cell */
+.cell.research {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
 }

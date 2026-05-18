@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build and output
+dist
+coverage
+*.tsbuildinfo
+.cache
+
+# OS and editor
+.DS_Store
+Thumbs.db
+*.sw?
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Optional: ignore npm debug logs at repo root
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
