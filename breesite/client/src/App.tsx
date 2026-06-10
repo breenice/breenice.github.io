@@ -46,7 +46,7 @@ const projects: {
 
 const timelineData = [
   {
-    title: 'Software Engineer',
+    title: 'Software Developer',
     company: 'Aderas',
     date: 'June 2025 – Present',
     description: 'Developing AI-powered data analysis platforms on AWS and Azure for government clients, integrating Salesforce and SharePoint pipelines to improve data interoperability. Containerized Azure Functions using Docker and applied DevSecOps scanning practices to harden images; implemented real-time streaming within AI workflows to reduce latency.',
@@ -221,15 +221,13 @@ function App() {
         {/* Row 1: Banner | Currently */}
         <div id="about" className="cell banner">
           <p className="banner-text">
-            an engineer who loves to build and found passion in coding in the process.
             into: gamification, security, and robotics.<br />
-            putting ideas into reality.<br />
             doing my best to improve my work and the world.
           </p>
         </div>
         <div className="cell currently">
           <h2 className="cell-title"><span className="blink-dot"></span>currently...</h2>
-          <div className="currently-inner">Software Engineer at Aderas</div>
+          <div className="currently-inner">Software Developer at Aderas</div>
         </div>
 
         {/* Education — full width */}
