@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Github, Linkedin, Mail, FileDown, GraduationCap, Briefcase, BadgeCheck, Microscope } from 'lucide-react'
-// import { Folder } from 'lucide-react' // re-enable with projects section
+import { Github, Linkedin, Mail, FileDown, GraduationCap, Briefcase, BadgeCheck, Microscope, Folder, ExternalLink } from 'lucide-react'
 import './App.css'
 
 /* projects data — re-enable with projects section
@@ -65,11 +64,19 @@ const navItems = [
   { id: 'experience', label: 'experience' },
   { id: 'skills',     label: 'skills' },
   { id: 'research',   label: 'research' },
+  { id: 'projects',   label: 'projects' },
 ]
 
 function App() {
   const [activeSection, setActiveSection] = useState('about')
+  const [carouselIdx, setCarouselIdx] = useState(0)
+  const carouselVideos = [
+    { src: '/images/test_run.mp4', label: 'Test Run' },
+    { src: '/images/gap_follow.mp4', label: 'Gap Follow' },
+    { src: '/images/competition.mp4', label: 'Competition' },
+  ]
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const acAudioRef = useRef<HTMLAudioElement>(new Audio('/images/animal-crossing-talking-made-with-Voicemod.mp3'))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -219,7 +226,14 @@ function App() {
         </div>
         <div className="grid-layout">
         {/* Row 1: Banner | Currently */}
-        <div id="about" className="cell banner">
+        <div
+          id="about"
+          className="cell banner"
+          onMouseEnter={() => { acAudioRef.current.currentTime = 0; acAudioRef.current.play() }}
+          onMouseLeave={() => { acAudioRef.current.pause(); acAudioRef.current.currentTime = 0 }}
+        >
+          <img src="/images/scrappy (2).png" alt="Scrappy" className="banner-scrappy" />
+          <span className="banner-bubble-tail">◄</span>
           <p className="banner-text">
             into: gamification, security, and robotics.<br />
             doing my best to improve my work and the world.
@@ -292,53 +306,55 @@ function App() {
           <div className="research-divider" />
           <div className="extras-section">
             <h3 className="extras-heading">publications</h3>
-            <p className="extras-sub">
-              <a href="https://arxiv.org/abs/2604.11975" target="_blank" rel="noopener noreferrer"><em>A Multimodal Framework for Human-Multi-Agent Interaction</em></a> — first author, ACM/IEEE HRI 2026 Workshop
-            </p>
-            <p className="extras-sub">
-              <a href="https://project-m2hri.github.io/" target="_blank" rel="noopener noreferrer"><em>M2HRI: An LLM-Driven Multimodal Multi-Agent Framework for Personalized HRI</em></a> — under review, IEEE RO-MAN 2026
-            </p>
+            <div className="pub-stack">
+              <div className="pub-card">
+                <img src="/images/naos.png" alt="NAO robots" className="pub-img" />
+                <p className="pub-text">
+                  <em>A Multimodal Framework for Human-Multi-Agent Interaction</em><br />
+                  <span className="pub-venue">first author · ACM/IEEE HRI 2026 Workshop&nbsp;<a href="https://arxiv.org/abs/2603.23271" target="_blank" rel="noopener noreferrer"><ExternalLink size={12} style={{ verticalAlign: 'middle', display: 'inline' }} /></a></span>
+                </p>
+              </div>
+              <div className="pub-card">
+                <img src="/images/m2hri.png" alt="M2HRI system diagram" className="pub-img" />
+                <p className="pub-text">
+                  <em>M2HRI: An LLM-Driven Multimodal Multi-Agent Framework for Personalized HRI</em><br />
+                  <span className="pub-venue">IEEE RO-MAN 2026&nbsp;<a href="https://project-m2hri.github.io/" target="_blank" rel="noopener noreferrer"><ExternalLink size={12} style={{ verticalAlign: 'middle', display: 'inline' }} /></a></span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Projects — commented out for now
+        {/* Projects */}
         <div id="projects" className="cell projects">
-          <h2 className="cell-title">projects</h2>
-          {activeProj
-            ? <div className="project-content">
-                <button className="back-btn" onClick={() => setActiveProject(null)}>
-                  <ArrowBigLeft size={34} />
-                </button>
-                <h2>{activeProj.label}</h2>
-                <p>{activeProj.description}</p>
-                {activeProj.details && activeProj.details.length > 0 && (
-                  <ul>
-                    {activeProj.details.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-                {activeProj.link && (
-                  <p>
-                    <a href={activeProj.link.url} target="_blank" rel="noopener noreferrer">{activeProj.link.label}</a>
-                  </p>
-                )}
+          <h2 className="cell-title"><Folder size={18} className="cell-title-icon" />projects</h2>
+          <div className="f1-layout">
+            <div className="extras-section">
+              <h3 className="extras-heading">F1 Tenth Autonomous Vehicle Racing &nbsp;·&nbsp; UVA</h3>
+              <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Programmer</strong> &nbsp;·&nbsp; Fall 2024</p>
+              <ul className="extras-list">
+                <li>Developed autonomous navigation algorithms for F1Tenth racing under Prof. Madhur Behl, using LiDAR and NVIDIA Jetson within a Ubuntu ROS environment.</li>
+                <li>Implemented ROS Cartographer SLAM and AMCL for real-time localization, and a follow-the-gap algorithm with dynamic speed-steering control for high-speed obstacle avoidance and passing moving vehicles.</li>
+              </ul>
+            </div>
+            <div className="carousel">
+              <video
+                key={carouselVideos[carouselIdx].src}
+                className="carousel-video"
+                src={carouselVideos[carouselIdx].src}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+              <div className="carousel-controls">
+                <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 2) % 3)}>‹</button>
+                <span className="carousel-label">{carouselVideos[carouselIdx].label}</span>
+                <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 1) % 3)}>›</button>
               </div>
-            : <div className="icon-grid">
-                {projects.map((proj) => (
-                  <button
-                    key={proj.id}
-                    className="icon-cell"
-                    onClick={() => setActiveProject(proj.id)}
-                  >
-                    {proj.image && <span className="icon-img">{proj.image}</span>}
-                    <span className="icon-label">{proj.label}</span>
-                  </button>
-                ))}
-              </div>
-          }
+            </div>
+          </div>
         </div>
-        */}
         </div>
       </div>
       </div>

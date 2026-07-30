@@ -216,6 +216,7 @@ body::after {
   overflow: hidden;
   display: flex;
   align-items: center;
+  padding: 0.4rem 0.75rem;
 }
 
 .cell.banner::before {
@@ -226,13 +227,50 @@ body::after {
   opacity: 0.3;
 }
 
+.banner-scrappy {
+  position: relative;
+  height: 110px;
+  width: auto;
+  margin-right: 1rem;
+  z-index: 1;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  transform-origin: bottom center;
+}
+
+.cell.banner:hover .banner-scrappy {
+  animation: talking 0.7s ease-in-out infinite;
+}
+
+@keyframes talking {
+  0%   { transform: scaleX(1)    scaleY(1); }
+  20%  { transform: scaleX(1.12) scaleY(0.88); }
+  40%  { transform: scaleX(0.9)  scaleY(1.1); }
+  60%  { transform: scaleX(1.08) scaleY(0.93); }
+  80%  { transform: scaleX(0.95) scaleY(1.05); }
+  100% { transform: scaleX(1)    scaleY(1); }
+}
+
+.banner-bubble-tail {
+  position: relative;
+  z-index: 1;
+  color: #8c92f9;
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  transform: translateY(-8px);
+  margin-right: -0.25rem;
+}
+
 .banner-text {
   position: relative;
   color: #8c92f9;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
   z-index: 1;
+  transform: translateY(-14px);
+  margin-left: 1rem;
 }
 
 /* Currently cell */
@@ -240,6 +278,7 @@ body::after {
   display: flex;
   flex-direction: column;
 }
+
 
 .blink-dot {
   display: inline-block;
@@ -387,6 +426,16 @@ body::after {
   opacity: 0.8;
 }
 
+.extras-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
@@ -416,10 +465,105 @@ body::after {
   flex-direction: column;
 }
 
-/* Projects cell - icon grid + back button */
-.cell.projects {
+.pub-stack {
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pub-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+}
+
+.pub-img {
+  flex-shrink: 0;
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+
+.pub-text {
+  flex: 1;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.pub-venue {
+  font-size: 0.78rem;
+  opacity: 0.65;
+}
+
+/* Projects cell - icon grid + back button */
+.cell.projects {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+}
+
+.f1-layout {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.f1-layout .extras-section {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.carousel {
+  flex-shrink: 0;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.carousel-video {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.carousel-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: inherit;
+  font-size: 1.1rem;
+  padding: 0.1rem 0.6rem;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.carousel-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.carousel-label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-align: center;
+  flex: 1;
 }
 
 .icon-grid {
