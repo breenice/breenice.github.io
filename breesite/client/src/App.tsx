@@ -76,8 +76,6 @@ function App() {
     { src: '/images/competition.mp4', label: 'Competition' },
   ]
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const acAudioRef = useRef<HTMLAudioElement>(new Audio('/images/animal-crossing-talking-made-with-Voicemod.mp3'))
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -229,8 +227,6 @@ function App() {
         <div
           id="about"
           className="cell banner"
-          onMouseEnter={() => { acAudioRef.current.currentTime = 0; acAudioRef.current.play() }}
-          onMouseLeave={() => { acAudioRef.current.pause(); acAudioRef.current.currentTime = 0 }}
         >
           <img src="/images/scrappy (2).png" alt="Scrappy" className="banner-scrappy" />
           <span className="banner-bubble-tail">◄</span>
