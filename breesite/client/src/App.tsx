@@ -398,7 +398,7 @@ function App() {
             <div className="f1-layout">
               <div className="extras-section">
                 <h3 className="extras-heading">Chuchu's Bakery</h3>
-                <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Game jam project programmer</strong> </p>
+                <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Game jam project programmer</strong> &nbsp;·&nbsp; August 2026</p>
                 <ul className="extras-list">
                   <li>Built a timed bakery management game in Phaser. Implemented round progression, inventory crafting, a recipe book UI, smithing minigame, and boss encounters with original pixel art and sound design.</li>
                   <li>Led a three-person team through a game jam, coordinating an artist and musician, assigning tasks, tracking progress, and keeping communication organized while handling the game's programming and systems.</li>
