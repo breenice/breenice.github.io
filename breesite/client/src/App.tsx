@@ -220,24 +220,21 @@ function App() {
       <div className="right-content">
         <div className="title-row">
           <h1 className="title">breenice lee</h1>
-          <span className="bubble">software engineer</span>
+          <div className="currently-badge">
+            <span className="blink-dot"></span>
+            <span className="currently-badge-label">currently...</span>
+            <span className="currently-badge-role">Software Developer at Aderas</span>
+          </div>
         </div>
         <div className="grid-layout">
-        {/* Row 1: Banner | Currently */}
+        {/* Row 1: Banner */}
         <div
           id="about"
           className="cell banner"
         >
-          <img src="/images/scrappy (2).png" alt="Scrappy" className="banner-scrappy" />
-          <span className="banner-bubble-tail">◄</span>
           <p className="banner-text">
-            into: gamification, security, and robotics.<br />
-            doing my best to improve my work and the world.
+            currently into gamification, networking, and robotics. doing my best to improve my work and the world.
           </p>
-        </div>
-        <div className="cell currently">
-          <h2 className="cell-title"><span className="blink-dot"></span>currently...</h2>
-          <div className="currently-inner">Software Developer at Aderas</div>
         </div>
 
         {/* Education — full width */}

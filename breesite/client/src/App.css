@@ -62,7 +62,10 @@ body::after {
   text-align: left;
 }
 
-.bubble {
+.currently-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   background: var(--color-title);
   color: var(--color-bg);
   font-size: 0.9rem;
@@ -70,6 +73,15 @@ body::after {
   padding: 0.4rem 1rem;
   border-radius: 999px;
   white-space: nowrap;
+}
+
+.currently-badge-label {
+  opacity: 0.85;
+}
+
+.currently-badge .blink-dot {
+  background-color: #4ade80;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.35);
 }
 
 /* Main layout: sidebar + grid */
@@ -212,6 +224,7 @@ body::after {
 
 /* Banner cell */
 .cell.banner {
+  grid-column: 1 / -1;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -227,41 +240,6 @@ body::after {
   opacity: 0.3;
 }
 
-.banner-scrappy {
-  position: relative;
-  height: 110px;
-  width: auto;
-  margin-right: 1rem;
-  z-index: 1;
-  image-rendering: pixelated;
-  flex-shrink: 0;
-  transform-origin: bottom center;
-}
-
-.cell.banner:hover .banner-scrappy {
-  animation: talking 0.7s ease-in-out infinite;
-}
-
-@keyframes talking {
-  0%   { transform: scaleX(1)    scaleY(1); }
-  20%  { transform: scaleX(1.12) scaleY(0.88); }
-  40%  { transform: scaleX(0.9)  scaleY(1.1); }
-  60%  { transform: scaleX(1.08) scaleY(0.93); }
-  80%  { transform: scaleX(0.95) scaleY(1.05); }
-  100% { transform: scaleX(1)    scaleY(1); }
-}
-
-.banner-bubble-tail {
-  position: relative;
-  z-index: 1;
-  color: #8c92f9;
-  font-size: 1.1rem;
-  line-height: 1;
-  flex-shrink: 0;
-  transform: translateY(-8px);
-  margin-right: -0.25rem;
-}
-
 .banner-text {
   position: relative;
   color: #8c92f9;
@@ -269,40 +247,21 @@ body::after {
   font-weight: 500;
   margin: 0;
   z-index: 1;
-  transform: translateY(-14px);
-  margin-left: 1rem;
 }
-
-/* Currently cell */
-.cell.currently {
-  display: flex;
-  flex-direction: column;
-}
-
 
 .blink-dot {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #4ade80;
-  margin-right: 0.5rem;
-  vertical-align: middle;
+  flex-shrink: 0;
   animation: blink 1.5s ease-in-out infinite;
 }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
-}
-
-.currently-inner {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: var(--padding);
-  box-sizing: border-box;
 }
 
 /* Education cell */
