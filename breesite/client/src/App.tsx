@@ -48,14 +48,39 @@ const timelineData = [
     title: 'Software Developer',
     company: 'Aderas',
     date: 'June 2025 – Present',
-    description: 'Developing AI-powered data analysis platforms on AWS and Azure for government clients, integrating Salesforce and SharePoint pipelines to improve data interoperability. Containerized Azure Functions using Docker and applied DevSecOps scanning practices to harden images; implemented real-time streaming within AI workflows to reduce latency.',
+    description: [
+      'Developing AI-powered data analysis platforms on AWS and Azure for government clients, integrating Salesforce and SharePoint pipelines to improve data interoperability.',
+      'Containerized Azure Functions using Docker and applied DevSecOps scanning practices to harden images.',
+      'Implemented real-time streaming within AI workflows to reduce latency.',
+    ],
   },
   {
     title: 'Part-time Associate Software Engineer',
     company: 'VAE, Inc.',
     date: 'June 2024 – May 2025',
-    description: 'Built a full-stack network device discovery and reporting tool for DoD deployment using Angular/TypeScript and C#/.NET; integrated REST APIs and containerized services with Docker; enforced DISA APL compliance via .NET code analyzers. Mapped Microsoft Code Analysis rules to GitLab SAST and OWASP Top 10; supported CI/CD regression testing with Cypress and simulated networks of 400+ devices in PostgreSQL for multi-cycle vulnerability analysis.',
-  },
+    // bullet points, new lines should be there
+    description: [
+      'Built a full-stack network device discovery/reporting tool for DoD deployment using Angular/TypeScript and C#/.NET.',
+      'Containerized services with Docker and enforced DISA APL compliance through .NET code analyzers.',
+      'Built Cypress regression tests and simulated 400+ device networks in PostgreSQL for vulnerability analysis.',
+    ],
+    },
+]
+const skillTags = [
+  { name: 'Python', category: 'lang' },
+  { name: 'C/C++', category: 'lang' },
+  { name: 'HTML/CSS', category: 'lang' },
+  { name: 'JavaScript', category: 'lang' },
+  { name: 'ROS', category: 'library' },
+  { name: 'React', category: 'library' },
+  { name: 'Angular', category: 'library' },
+  { name: '.NET', category: 'library' },
+  { name: 'PyTorch', category: 'library' },
+  { name: 'TensorFlow', category: 'library' },
+  { name: 'OpenCV', category: 'library' },
+  { name: 'AWS', category: 'cloud' },
+  { name: 'Azure', category: 'cloud' },
+  { name: 'Docker', category: 'cloud' },
 ]
 
 const navItems = [
@@ -233,7 +258,7 @@ function App() {
           className="cell banner"
         >
           <p className="banner-text">
-            currently building AI systems for government and research robotics
+            Currently building AI systems for government and research robotics
           </p>
         </div>
 
@@ -261,7 +286,11 @@ function App() {
               <div key={i} className="timeline-entry">
                 <h3>{entry.title} — {entry.company}</h3>
                 <div className="timeline-date">{entry.date}</div>
-                <p>{entry.description}</p>
+                <ul className="timeline-description">
+                  {entry.description.map((d, j) => (
+                    <li key={j}>{d}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -280,12 +309,18 @@ function App() {
             </div>
           </div>
           <div className="extras-section">
-            <h3 className="extras-heading">skills</h3>
-            <div className="skill-tags">
-              {['Python', 'JavaScript', 'TypeScript', 'C#', 'Java', 'C/C++', 'R', 'SQL', 'MATLAB', 'Assembly', 'React', 'Angular', 'Django', '.NET', 'ROS', 'PyTorch', 'TensorFlow', 'OpenCV', 'Docker', 'AWS', 'Azure', 'PostgreSQL', 'SLAM', 'HTML/CSS'].map((s) => (
-                <span key={s} className="skill-tag">{s}</span>
-              ))}
-            </div>
+          <h3 className="extras-heading">
+            skills
+            <span className="skill-legend skill-legend--library">libraries</span>
+            <span className="skill-legend skill-legend--cloud">cloud</span>
+          </h3>
+          <div className="skill-tags">
+            {skillTags.map((s) => (
+              <span key={s.name} className={`skill-tag skill-tag--${s.category}`}>
+                {s.name}
+              </span>
+            ))}
+          </div>
           </div>
         </div>
 
@@ -293,8 +328,17 @@ function App() {
         <div id="research" className="cell research">
           <h2 className="cell-title"><Microscope size={18} className="cell-title-icon" />research</h2>
           <div className="extras-section">
-            <h3 className="extras-heading">UVA Collaborative Robotics Lab &nbsp;·&nbsp; Feburary 2025 - Present </h3>
-            <p className="extras-sub">Developed an object detection pipeline using Grounded-SAM for 3D point cloud segmentation on an Intel RealSense camera (OpenCV, NumPy, PyTorch) to improve task and motion planning for a Franka Panda manipulator simulated in PyBullet. Built a multi-modal HRI system for the NAO robot integrating real-time speech recognition (OpenAI Whisper API) and physical responses to visual/auditory cues for hospital applications.</p>
+            <h3 className="extras-heading">UVA Collaborative Robotics Lab &nbsp;·&nbsp; February 2025 - Present</h3>
+            <div className="research-projects">
+              <div className="research-project">
+                <h4 className="research-project-title">Computer Vision / Robot Manipulation</h4>
+                <p className="extras-sub">Built a Grounded-SAM perception pipeline for segmenting 3D point clouds from an Intel RealSense camera, enabling object-aware task and motion planning for a Franka Panda manipulator in PyBullet.</p>
+              </div>
+              <div className="research-project">
+                <h4 className="research-project-title">Human-Robot Interaction</h4>
+                <p className="extras-sub">Built a multimodal HRI system for NAO combining speech recognition, visual/auditory cues, and adaptive physical responses for healthcare applications.</p>
+              </div>
+            </div>
           </div>
           <div className="research-divider" />
           <div className="extras-section">
@@ -321,29 +365,52 @@ function App() {
         {/* Projects */}
         <div id="projects" className="cell projects">
           <h2 className="cell-title"><Folder size={18} className="cell-title-icon" />projects</h2>
-          <div className="f1-layout">
-            <div className="extras-section">
-              <h3 className="extras-heading">F1 Tenth Autonomous Vehicle Racing &nbsp;·&nbsp; UVA</h3>
-              <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Programmer</strong> &nbsp;·&nbsp; Fall 2024</p>
-              <ul className="extras-list">
-                <li>Developed autonomous navigation algorithms for F1Tenth racing under Prof. Madhur Behl, using LiDAR and NVIDIA Jetson within a Ubuntu ROS environment.</li>
-                <li>Implemented ROS Cartographer SLAM and AMCL for real-time localization, and a follow-the-gap algorithm with dynamic speed-steering control for high-speed obstacle avoidance and passing moving vehicles.</li>
-              </ul>
+          <div className="project-stack">
+            <div className="f1-layout">
+              <div className="extras-section">
+                <h3 className="extras-heading">F1 Tenth Autonomous Vehicle Racing &nbsp;·&nbsp; UVA</h3>
+                <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Programmer</strong> &nbsp;·&nbsp; Fall 2024</p>
+                <ul className="extras-list">
+                  <li>Developed autonomous navigation algorithms for F1Tenth racing under Prof. Madhur Behl, using LiDAR and NVIDIA Jetson within a Ubuntu ROS environment.</li>
+                  <li>Implemented ROS Cartographer SLAM and AMCL for real-time localization, and a follow-the-gap algorithm with dynamic speed-steering control for high-speed obstacle avoidance and passing moving vehicles.</li>
+                </ul>
+              </div>
+              <div className="carousel">
+                <video
+                  key={carouselVideos[carouselIdx].src}
+                  className="carousel-video"
+                  src={carouselVideos[carouselIdx].src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                <div className="carousel-controls">
+                  <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 2) % 3)}>‹</button>
+                  <span className="carousel-label">{carouselVideos[carouselIdx].label}</span>
+                  <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 1) % 3)}>›</button>
+                </div>
+              </div>
             </div>
-            <div className="carousel">
-              <video
-                key={carouselVideos[carouselIdx].src}
-                className="carousel-video"
-                src={carouselVideos[carouselIdx].src}
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-              <div className="carousel-controls">
-                <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 2) % 3)}>‹</button>
-                <span className="carousel-label">{carouselVideos[carouselIdx].label}</span>
-                <button className="carousel-btn" onClick={() => setCarouselIdx((carouselIdx + 1) % 3)}>›</button>
+
+            <div className="project-divider" />
+
+            <div className="f1-layout">
+              <div className="extras-section">
+                <h3 className="extras-heading">Chuchu's Bakery</h3>
+                <p className="extras-sub" style={{ marginBottom: '0.35rem' }}><strong>Game jam project programmer</strong> </p>
+                <ul className="extras-list">
+                  <li>Built a timed bakery management game in Phaser. Implemented round progression, inventory crafting, a recipe book UI, smithing minigame, and boss encounters with original pixel art and sound design.</li>
+                  <li>Led a three-person team through a game jam, coordinating an artist and musician, assigning tasks, tracking progress, and keeping communication organized while handling the game's programming and systems.</li>
+                </ul>
+                <p className="extras-sub" style={{ marginTop: '0.5rem' }}>
+                  <a href="https://beechuus.itch.io/bread-sword" target="_blank" rel="noopener noreferrer" className="project-link">
+                    Play on itch.io <ExternalLink size={12} style={{ verticalAlign: 'middle', display: 'inline' }} />
+                  </a>
+                </p>
+              </div>
+              <div className="project-media">
+                <img src="/images/chuchu-bakery-gameplay.png" alt="Chuchu's Bakery gameplay" className="project-img" />
               </div>
             </div>
           </div>

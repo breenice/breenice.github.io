@@ -417,6 +417,18 @@ body::after {
   margin: 0.75rem 0;
 }
 
+.research-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.research-project-title {
+  margin: 0 0 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 /* Research cell */
 .cell.research {
   grid-column: 1 / -1;
@@ -477,6 +489,43 @@ body::after {
 .f1-layout .extras-section {
   flex: 1;
   margin-bottom: 0;
+}
+
+.project-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 1rem 0;
+}
+
+.project-media {
+  flex-shrink: 0;
+  width: 260px;
+}
+
+.project-img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  display: block;
+  image-rendering: pixelated;
+  background: #000;
+}
+
+.project-link {
+  color: var(--color-title);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.project-link:hover {
+  text-decoration: underline;
 }
 
 .carousel {
@@ -628,4 +677,24 @@ body::after {
 .link-item a:hover {
   color: #535bf2;
   text-decoration: underline;
+}
+
+.skill-legend {
+  margin-left: 0.6rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.skill-legend--library { color: #e96eff; }
+.skill-legend--cloud { color: #22c55e; }
+
+.skill-tag--library {
+  background: rgba(242, 59, 248, 0.15);
+  border-color: rgba(90, 38, 107, 0.45);
+  color: #e96eff;
+}
+.skill-tag--cloud {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: #22c55e;
 }
