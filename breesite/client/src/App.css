@@ -334,8 +334,18 @@ body::after {
 
 .timeline-entry p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   opacity: 0.85;
+}
+
+.timeline-description {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.82rem;
+  opacity: 0.8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 /* Skills cell */
