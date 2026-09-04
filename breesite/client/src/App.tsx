@@ -258,7 +258,7 @@ function App() {
           className="cell banner"
         >
           <p className="banner-text">
-            Currently building AI systems for government and research robotics
+            Currently building AI systems for government and research robotics. Always working to make things and myself better, one iteration at a time.
           </p>
         </div>
 
