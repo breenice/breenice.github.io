@@ -233,7 +233,7 @@ function App() {
           className="cell banner"
         >
           <p className="banner-text">
-            currently into gamification, networking, and robotics. doing my best to improve my work and the world.
+            currently building AI systems for government and research robotics
           </p>
         </div>
 
