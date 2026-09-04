@@ -230,6 +230,8 @@ body::after {
   display: flex;
   align-items: center;
   padding: 0.4rem 0.75rem;
+  justify-content: center;
+  opacity: 0.8;
 }
 
 .cell.banner::before {
@@ -241,12 +243,12 @@ body::after {
 }
 
 .banner-text {
-  position: relative;
   color: #8c92f9;
   font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
   z-index: 1;
+  text-align: center;
 }
 
 .blink-dot {
